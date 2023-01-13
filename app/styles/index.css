@@ -1,0 +1,17 @@
+.ContributionCalendar-day, .ContributionCalendar-day[data-level="0"] {
+    fill: #ebedf0;
+    shape-rendering: geometricPrecision;
+    background-color: #ebedf0;
+    border-radius: 2px;
+    outline: 1px solid rgba(27, 31, 35, 0.06);
+    outline-offset: -1px;
+}
+
+.ContributionCalendar-label {
+    padding: 0.125em 0.5em 0.125em 0;
+    font-size: 12px;
+    font-weight: var(--base-text-weight-normal, 400);
+    color: #24292f;
+    text-align: left;
+    fill: #24292f;
+}
