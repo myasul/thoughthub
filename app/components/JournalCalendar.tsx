@@ -1,14 +1,19 @@
 import dayjs from 'dayjs'
+import type { Dayjs } from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 
-import type { AbbrevMonthName } from '~/components/calendar/svg/MonthLabelSVGText'
-import { DayLabelSVGText } from '~/components/calendar/svg/DayLabelSVGText'
-import { JournalSVGRect } from '~/components/calendar/svg/JournalSVGRect'
-import { MonthLabelSVGText } from '~/components/calendar/svg/MonthLabelSVGText'
+import type { AbbrevMonthName } from '~/components/svg/MonthLabelSVGText'
+import { DayLabelSVGText } from '~/components/svg/DayLabelSVGText'
+import { JournalSVGRect } from '~/components/svg/JournalSVGRect'
+import { MonthLabelSVGText } from '~/components/svg/MonthLabelSVGText'
 
 dayjs.extend(weekOfYear)
 
-export const JournalCalendar = () => {
+type Props = {
+    onEntryClick: (date: Dayjs) => void
+}
+
+export const JournalCalendar = ({ onEntryClick }: Props) => {
     const generateCalendarSvg = () => {
         const firstDayOfCurrentYear = dayjs(`${dayjs().year()}-01-01T00:00:00Z`)
         const firstDayOfNextYear = firstDayOfCurrentYear.add(1, 'year')
@@ -32,22 +37,22 @@ export const JournalCalendar = () => {
             const groupXPosition = calendarGroups.length * 14
             const dayXPosition = 14 - calendarGroups.length
 
+            if (currentDay.month() !== currentMonth) {
+                monthLabels.push(
+                    <MonthLabelSVGText
+                        y={-7}
+                        x={groupXPosition + dayXPosition}
+                        month={currentDay.format('MMM') as AbbrevMonthName}
+                        key={groupXPosition}
+                    />
+                )
+                currentMonth = currentDay.month()
+            }
+
             while (
                 currentDay.week() === currentWeek &&
                 currentDay.isBefore(firstDayOfNextYear)
             ) {
-                if (currentDay.month() !== currentMonth) {
-                    monthLabels.push(
-                        <MonthLabelSVGText
-                            y={-7}
-                            x={groupXPosition + dayXPosition}
-                            month={currentDay.format('MMM') as AbbrevMonthName}
-                            key={currentMonth}
-                        />
-                    )
-                    currentMonth = currentDay.month()
-                }
-
                 const dayYPosition = currentDay.day() * 13
 
                 days.push(
@@ -55,6 +60,7 @@ export const JournalCalendar = () => {
                         x={dayXPosition}
                         y={dayYPosition}
                         date={currentDay}
+                        onClick={onEntryClick}
                     />
                 )
 
