@@ -14,7 +14,8 @@ export const JournalSVGRect = ({x, y, date}: Props) => (
         ry="2"
         className="
             shape-geometric-precision bg-[#ebedf0] fill-[#ebedf0]
-            outline-offset-[-1px] outline-none rounded-sm
+            rounded-sm outline outline-offset-[-1px] outline-1
+             outline-calendar-entry-border
         "
         x={x}
         y={y}

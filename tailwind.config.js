@@ -24,7 +24,11 @@ const shapeRendering = plugin(function ({ addUtilities }) {
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+           'calendar-entry-border' : 'rgba(27, 31, 35, 0.06)'
+        }
+    },
     fontFamily: {
         'calendar': ['system-ui', 'sans-serif']
     }
