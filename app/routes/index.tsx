@@ -1,16 +1,18 @@
 import type { LinksFunction } from '@remix-run/node'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+import type { AbbrevMonthName } from '~/components/calendar/svg/MonthLabelSVGText'
+import { DayLabelSVGText } from '~/components/calendar/svg/DayLabelSVGText'
+import { JournalSVGRect } from '~/components/calendar/svg/JournalSVGRect'
+import { MonthLabelSVGText } from '~/components/calendar/svg/MonthLabelSVGText'
+
 import stylesUrl from "~/styles/index.css"
 
-export const links: LinksFunction = () => {
-    return [
-        {
-            rel: "stylesheet",
-            href: stylesUrl,
-        },
-    ]
-}
+export const links: LinksFunction = () => ([{
+    rel: "stylesheet",
+    href: stylesUrl,
+}])
 
 dayjs.extend(weekOfYear)
 
@@ -24,9 +26,12 @@ export default function Index () {
 
         const calendarGroups = []
         const monthLabels = [
-            <text x="14" y="-7" className="ContributionCalendar-label" key={currentMonth}>
-                {currentDay.format('MMM')}
-            </text>
+            <MonthLabelSVGText
+                x={14}
+                y={-7}
+                month={currentDay.format('MMM') as AbbrevMonthName}
+                key={currentMonth}
+            />
         ]
 
         while (currentDay.isBefore(firstDayOfNextYear)) {
@@ -41,14 +46,12 @@ export default function Index () {
             ) {
                 if (currentDay.month() !== currentMonth) {
                     monthLabels.push(
-                        <text
-                            className="ContributionCalendar-label"
-                            y="-7"
+                        <MonthLabelSVGText
+                            y={-7}
                             x={groupXPosition + dayXPosition}
+                            month={currentDay.format('MMM') as AbbrevMonthName}
                             key={currentMonth}
-                        >
-                            {currentDay.format('MMM')}
-                        </text>
+                        />
                     )
                     currentMonth = currentDay.month()
                 }
@@ -56,20 +59,11 @@ export default function Index () {
                 const dayYPosition = currentDay.day() * 13
 
                 days.push(
-                    <rect
-                        width="10"
-                        height="10"
+                    <JournalSVGRect
                         x={dayXPosition}
                         y={dayYPosition}
-                        className="ContributionCalendar-day"
-                        data-date={currentDay.format('DD-MM-YYYY')}
-                        data-level="0"
-                        rx="2"
-                        ry="2"
-                        key={currentDay.valueOf()}
-                    >
-                        {currentDay.toString()}
-                    </rect>
+                        date={currentDay}
+                    />
                 )
 
                 currentDay = currentDay.add(1, 'day')
@@ -89,20 +83,20 @@ export default function Index () {
                 {...calendarGroups}
                 {...monthLabels}
 
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="8" style={{ display: 'none' }}>Sun</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="22">Mon</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="32" style={{ display: 'none' }}>Tue</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="48">Wed</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="57" style={{ display: 'none' }}>Thu</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="73">Fri</text>
-                <text text-anchor="start" className="ContributionCalendar-label" dx="-15" dy="81" style={{ display: 'none' }}>Sat</text>
+                <DayLabelSVGText dx={-15} dy={8} isVisible={false} day='Sun' />
+                <DayLabelSVGText dx={-15} dy={22} day='Mon' />
+                <DayLabelSVGText dx={-15} dy={32} isVisible={false} day='Tue' />
+                <DayLabelSVGText dx={-15} dy={48} day='Wed' />
+                <DayLabelSVGText dx={-15} dy={57} isVisible={false} day='Thu' />
+                <DayLabelSVGText dx={-15} dy={73} day='Fri' />
+                <DayLabelSVGText dx={-15} dy={81} isVisible={false} day='Sat' />
             </g>
         )
     }
 
     return (
-        <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }} className='m-3'>
-            <svg width="717" height="112" className="js-calendar-graph-svg">
+        <div className='m-3 leading-normal font-calendar'>
+            <svg width="717" height="112">
                 {generateCalendarSvg()}
             </svg>
         </div>

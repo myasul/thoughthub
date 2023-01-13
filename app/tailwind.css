@@ -520,3 +520,51 @@ video {
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
+.bg-\[\#ebedf0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 237 240 / var(--tw-bg-opacity));
+}
+
+.fill-\[\#ebedf0\] {
+  fill: #ebedf0;
+}
+
+.font-calendar {
+  font-family: system-ui, sans-serif;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.leading-normal {
+  line-height: 1.5;
+}
+
+.text-\[\#24292f\] {
+  --tw-text-opacity: 1;
+  color: rgb(36 41 47 / var(--tw-text-opacity));
+}
+
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.outline-offset-\[-1px\] {
+  outline-offset: -1px;
+}
+
+.shape-geometric-precision {
+  shape-rendering: geometricPrecision;
+}
