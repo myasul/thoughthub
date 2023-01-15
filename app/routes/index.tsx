@@ -33,7 +33,7 @@ export default function Index () {
                     className='
                     w-full flex justify-center h-3/5 flex-col items-center
                     border border-t-0 rounded-md rounded-t-[0] border-[#d0d7de]
-                '
+                    '
                 >
                     <JournalTextArea currentDate={currentDate} />
                 </div>

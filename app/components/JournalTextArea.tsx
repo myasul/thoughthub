@@ -1,5 +1,11 @@
 import type { Dayjs } from 'dayjs'
-import { JournalDateFormat, useJournal } from '~/contexts/JournalContext'
+import { ChangeEventHandler, useEffect, useState } from 'react'
+import {
+    JournalActionType,
+    JournalDateFormat,
+    useJournal,
+    useJournalDispatch
+} from '~/contexts/JournalContext'
 
 type Props = {
     currentDate: Dayjs
@@ -7,7 +13,19 @@ type Props = {
 
 export const JournalTextArea = ({ currentDate }: Props) => {
     const journal = useJournal()
+    const dispatch = useJournalDispatch()
+
     const journalEntry = journal[currentDate.format(JournalDateFormat)] ?? ''
+
+    const handleEntryChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+        const text = event.target.value
+
+        dispatch({
+            type: JournalActionType.Update,
+            date: currentDate.format(JournalDateFormat),
+            entry: text
+        })
+    }
 
     return (
         <>
@@ -18,13 +36,12 @@ export const JournalTextArea = ({ currentDate }: Props) => {
             </h3>
             <textarea
                 className='
-                        shadow-inner p-4 outline-none resize-none 
-                        rounded-md m-auto mt-8 max-h-80 h-full w-4/5
-                    '
-                style={{
-                    boxShadow: 'rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px'
-                }}
+                    shadow-inner p-4 outline-none resize-none 
+                    rounded-md m-auto mt-8 max-h-80 h-full w-4/5
+                '
+                style={{ boxShadow: 'rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px' }}
                 value={journalEntry}
+                onChange={handleEntryChange}
             />
         </>
     )

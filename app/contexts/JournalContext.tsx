@@ -5,18 +5,20 @@ type Journal = {
     [date: string]: string | undefined
 }
 
-enum JournalActionType {
-    Add = 'ADD',
+export enum JournalActionType {
     Update = 'UPDATE'
 }
 
-type JournalAction =
-    | { type: JournalActionType.Add, entry: string }
-    | { type: JournalActionType.Update, entry: string }
+type JournalAction = { type: JournalActionType.Update, date: string, entry: string }
 
-export const JournalDateFormat = 'MM-DD-YYYY'
 
 const journalReducer: Reducer<Journal, JournalAction> = (journal: Journal, action: JournalAction) => {
+    if (action.type === JournalActionType.Update) {
+        journal[action.date] = action.entry
+
+        return { ...journal }
+    }
+
     return journal
 }
 
@@ -37,8 +39,13 @@ const initialJournal: Journal = {
     '12-24-2023': 'Tell me and I forget. Teach me and I remember. Involve me and I learn.'
 }
 
+const dummyDispatch: Dispatch<JournalAction> = (action: JournalAction) => {}
+
+const JournalDispatchContext = createContext(dummyDispatch)
 const JournalContext = createContext(initialJournal)
-const JournalDispatchContext = createContext<Dispatch<JournalAction> | null>(null)
+
+export const useJournal = () => useContext(JournalContext)
+export const useJournalDispatch = () => useContext(JournalDispatchContext)
 
 export const JournalProvider = ({ children }: { children: React.ReactNode }) => {
     const [journal, dispatch] = useReducer(journalReducer, initialJournal)
@@ -52,5 +59,4 @@ export const JournalProvider = ({ children }: { children: React.ReactNode }) => 
     )
 }
 
-export const useJournal = () => useContext(JournalContext)
-export const useJournalDispatch = () => useContext(JournalDispatchContext)
+export const JournalDateFormat = 'MM-DD-YYYY'
