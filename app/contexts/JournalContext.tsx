@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import type { Reducer, Dispatch } from 'react'
-import { hydrate } from 'react-dom'
 
 export type Journal = {
     [date: string]: string | undefined

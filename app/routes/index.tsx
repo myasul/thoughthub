@@ -1,5 +1,5 @@
 import type { Dayjs } from 'dayjs'
-import type { JournalAction } from '~/contexts/JournalContext'
+import type { Journal, JournalAction } from '~/contexts/JournalContext'
 import type { Dispatch } from 'react'
 
 import dayjs from 'dayjs'
@@ -27,7 +27,7 @@ export default function Index () {
             journal[nextEntry.date] = nextEntry.value
 
             return journal
-        }, {})
+        }, {} as Journal)
 
         dispatch({ type: JournalActionType.Hydrate, journal: persistedJournal })
     }
