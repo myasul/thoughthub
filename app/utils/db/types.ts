@@ -5,7 +5,7 @@ export interface JournalSchema extends DBSchema {
         key: string,
         value: {
             date: string, 
-            value: string
+            text: string
         }
     }
 }

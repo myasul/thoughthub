@@ -6,6 +6,7 @@ import {
     useJournal,
     useJournalDispatch
 } from '~/contexts/JournalContext'
+import { Database } from '~/utils/db/Database'
 
 type Props = {
     currentDate: Dayjs
@@ -18,13 +19,13 @@ export const JournalTextArea = ({ currentDate }: Props) => {
     const journalEntry = journal[currentDate.format(JournalDateFormat)] ?? ''
 
     const handleEntryChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-        const text = event.target.value
+        const entry = event.target.value
+        const date = currentDate.format(JournalDateFormat)
 
-        dispatch({
-            type: JournalActionType.Update,
-            date: currentDate.format(JournalDateFormat),
-            entry: text
-        })
+        dispatch({ type: JournalActionType.Update, date, entry })
+
+        const db = new Database()
+        db.save('entry', { date, text: entry })
     }
 
     return (

@@ -35,12 +35,11 @@ export class Database {
 
     public async save (
         tableName: DatabaseTable,
-        key: string,
         value: any
     ) {
         const connection = await this.connectionPromise
 
-        return connection.put(tableName, value, key)
+        return connection.put(tableName, value)
     }
 
     public async batchSave (

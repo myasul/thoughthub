@@ -19,12 +19,19 @@ export default function Index () {
         hydrateJournal(dispatch)
     }, [dispatch])
 
+    // const hydrateDb = async (journal: Journal) => {
+    //     const entries = Object.entries(journal).map(([key, value]) => ({ date: key, text: value }))
+
+    //     const db = new Database()
+    //     await db.batchSave('entry', entries)
+    // }
+
     const hydrateJournal = async (dispatch: Dispatch<JournalAction>) => {
         const db = new Database()
         const entries = await db.findAll('entry')
 
         const persistedJournal = entries.reduce((journal, nextEntry) => {
-            journal[nextEntry.date] = nextEntry.value
+            journal[nextEntry.date] = nextEntry.text
 
             return journal
         }, {} as Journal)
