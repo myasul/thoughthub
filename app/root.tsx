@@ -6,6 +6,7 @@ import {
     Outlet,
     Scripts
 } from "@remix-run/react"
+import { JournalProvider } from './contexts/JournalContext'
 
 import styles from './tailwind.css'
 
@@ -35,7 +36,9 @@ const Document = ({ children }: { children: React.ReactNode }) => (
 
 const Root = () => (
     <Document>
-        <Outlet />
+        <JournalProvider>
+            <Outlet />
+        </JournalProvider>
     </Document>
 )
 

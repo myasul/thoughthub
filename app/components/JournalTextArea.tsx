@@ -1,5 +1,5 @@
 import type { Dayjs } from 'dayjs'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import type { ChangeEventHandler } from 'react'
 import {
     JournalActionType,
     JournalDateFormat,
