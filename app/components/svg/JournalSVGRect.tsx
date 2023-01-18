@@ -17,14 +17,16 @@ enum EntryLevel {
 }
 
 const getEntryLevel = (entry: string) => {
+    if (entry === '') return EntryLevel.LevelZero
+
     const wordCount = entry.split(' ').length
 
     if (wordCount > 30) return EntryLevel.LevelFour
     if (wordCount > 25) return EntryLevel.LevelThree
     if (wordCount > 10) return EntryLevel.LevelTwo
-    if (wordCount > 1) return EntryLevel.LevelOne
+    
+    return EntryLevel.LevelOne
 
-    return EntryLevel.LevelZero
 }
 
 export const JournalSVGRect = ({ x, y, date, onClick }: Props) => {
