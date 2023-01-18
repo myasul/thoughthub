@@ -38,7 +38,7 @@ export const JournalTextArea = ({ currentDate }: Props) => {
             <textarea
                 className='
                     shadow-inner p-4 outline-none resize-none 
-                    rounded-md m-auto mt-8 max-h-80 h-full w-4/5
+                    rounded-md m-auto mt-8 max-h-[470px] h-full w-4/5 mb-8
                 '
                 style={{ boxShadow: 'rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px' }}
                 value={journalEntry}

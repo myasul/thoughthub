@@ -26,7 +26,7 @@ const Document = ({ children }: { children: React.ReactNode }) => (
             <Meta />
             <Links />
         </head>
-        <body>
+        <body className='flex justify-center'>
             {children}
             <Scripts />
             <LiveReload />

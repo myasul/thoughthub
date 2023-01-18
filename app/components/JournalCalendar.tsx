@@ -77,20 +77,27 @@ export const JournalCalendar = ({ onEntryClick }: Props) => {
         }
 
         return (
-            <svg width="717" height="112">
-                <g transform="translate(15, 20)">
-                    {...calendarGroups}
-                    {...monthLabels}
-
-                    <DayLabelSVGText dx={-15} dy={8} isVisible={false} day='Sun' />
-                    <DayLabelSVGText dx={-15} dy={22} day='Mon' />
-                    <DayLabelSVGText dx={-15} dy={32} isVisible={false} day='Tue' />
-                    <DayLabelSVGText dx={-15} dy={48} day='Wed' />
-                    <DayLabelSVGText dx={-15} dy={57} isVisible={false} day='Thu' />
-                    <DayLabelSVGText dx={-15} dy={73} day='Fri' />
-                    <DayLabelSVGText dx={-15} dy={81} isVisible={false} day='Sat' />
-                </g>
-            </svg>
+            <div className='flex w-full gap-0'>
+                <svg width="30" height="112" className='w-[70px] sm:w-[30px]'>
+                    <g transform="translate(15, 20)">
+                        <DayLabelSVGText dx={-15} dy={8} isVisible={false} day='Sun' />
+                        <DayLabelSVGText dx={-15} dy={22} day='Mon' />
+                        <DayLabelSVGText dx={-15} dy={32} isVisible={false} day='Tue' />
+                        <DayLabelSVGText dx={-15} dy={48} day='Wed' />
+                        <DayLabelSVGText dx={-15} dy={57} isVisible={false} day='Thu' />
+                        <DayLabelSVGText dx={-15} dy={73} day='Fri' />
+                        <DayLabelSVGText dx={-15} dy={81} isVisible={false} day='Sat' />
+                    </g>
+                </svg>
+                <div className='overflow-x-auto w-[717px]'>
+                    <svg width="717" height="112" className='w-[717px]'>
+                        <g transform="translate(0, 20)">
+                            {...calendarGroups}
+                            {...monthLabels}
+                        </g>
+                    </svg>
+                </div>
+            </div>
         )
     }
 

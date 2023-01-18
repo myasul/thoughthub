@@ -46,15 +46,17 @@ export default function Index () {
     return (
         <div
             className='
-                m-auto leading-normal font-calendar w-screen h-screen 
-                flex flex-col items-center max-w-[800px] p-5
+                leading-normal font-calendar h-screen w-full
+                flex flex-col items-center p-5
+                md:max-w-[825px]
             '
         >
             <h1 className='my-5 font-bold'>Thought Hub</h1>
             <div
                 className='
                     border-[#d0d7de] border border-b-0 w-full rounded-md rounded-b-[0]
-                    p-5 flex justify-center
+                    px-5 py-5
+                    md:justify-center
                 '
             >
                 <JournalCalendar onEntryClick={handleJournalCalendarEntryClick} />
