@@ -1,5 +1,6 @@
 import type { Dayjs } from 'dayjs'
-import type { ChangeEventHandler } from 'react'
+import { lazy, Suspense } from 'react'
+
 import {
     JournalActionType,
     JournalDateFormat,
@@ -12,20 +13,21 @@ type Props = {
     currentDate: Dayjs
 }
 
+const ToastUIEditor = lazy(() => import('./ToastUIEditor'))
+
 export const JournalTextArea = ({ currentDate }: Props) => {
     const journal = useJournal()
     const dispatch = useJournalDispatch()
 
-    const journalEntry = journal[currentDate.format(JournalDateFormat)] ?? ''
+    const journalEntry = journal[currentDate.format(JournalDateFormat)] ?? ' '
 
-    const handleEntryChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-        const entry = event.target.value
+    const handleEntryChange = (text: string) => {
         const date = currentDate.format(JournalDateFormat)
 
-        dispatch({ type: JournalActionType.Update, date, entry })
+        dispatch({ type: JournalActionType.Update, date, entry: text })
 
         const db = new Database()
-        db.save('entry', { date, text: entry })
+        db.save('entry', { date, text })
     }
 
     return (
@@ -35,15 +37,21 @@ export const JournalTextArea = ({ currentDate }: Props) => {
                     {currentDate.format('dddd, MMMM D, YYYY')}
                 </span>
             </h3>
-            <textarea
+            <div
                 className='
-                    shadow-inner p-4 outline-none resize-none 
-                    rounded-md m-auto mt-8 max-h-[470px] h-full w-4/5 mb-8
+                    p-4 outline-none resize-none 
+                    rounded-md m-auto mt-3 max-h-[470px] h-full w-[95%] mb-3
                 '
-                style={{ boxShadow: 'rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px' }}
-                value={journalEntry}
-                onChange={handleEntryChange}
-            />
+            >
+                <Suspense fallback={<div />}>
+                    <ToastUIEditor
+                        value={journalEntry}
+                        onChange={handleEntryChange}
+                        height='100%'
+                        key={currentDate.valueOf()}
+                    />
+                </Suspense>
+            </div>
         </>
     )
 }

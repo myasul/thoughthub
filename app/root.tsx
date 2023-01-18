@@ -9,9 +9,11 @@ import {
 import { JournalProvider } from './contexts/JournalContext'
 
 import styles from './tailwind.css'
+import toastEditorStyles from '@toast-ui/editor/dist/toastui-editor.css'
 
 export const links: LinksFunction = () => ([
-    { rel: "stylesheet", href: styles }
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: toastEditorStyles }
 ])
 
 export const meta: MetaFunction = () => ({

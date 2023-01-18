@@ -17,6 +17,7 @@
     "@remix-run/netlify": "^1.10.0",
     "@remix-run/node": "^1.10.0",
     "@remix-run/react": "^1.10.0",
+    "@toast-ui/react-editor": "^3.2.2",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
     "idb": "^7.1.1",
