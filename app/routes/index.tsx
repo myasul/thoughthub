@@ -12,6 +12,7 @@ import { JournalTextArea } from '~/components/JournalTextArea'
 import { Database } from '~/utils/db/Database'
 import { MonthCalendar } from '~/components/MonthCalendar'
 import { CalendarType, CalendarTypeToggle } from '~/components/CalendarTypeToggle'
+import { Button } from '~/components/Button'
 
 export default function Index () {
     const [selectedDate, setCurrentDate] = useState<Dayjs>(dayjs())
@@ -50,6 +51,10 @@ export default function Index () {
         setSelectedCalendarType(calendarType)
     }
 
+    const handleTodayClick = () => {
+        setCurrentDate(dayjs())
+    }
+
     return (
         <div
             className='
@@ -77,8 +82,8 @@ export default function Index () {
                             : <MonthCalendar selectedDate={selectedDate} onEntryClick={handleJournalCalendarEntryClick} />
                     }
                 </div>
-                <div className='flex justify-center h-[50px] items-center'>
-                    <div></div>
+                <div className='flex justify-center h-[50px] items-center gap-4'>
+                    <Button text={'Today'} onClick={handleTodayClick} fontSize='12px'/>
                     <CalendarTypeToggle onToggle={handleCalendarTypeToggle} />
                 </div>
             </div>

@@ -78,7 +78,7 @@ export const YearCalendar = ({ onEntryClick }: Props) => {
 
         return (
             <div className='flex w-full gap-0'>
-                <svg width="30" height="112" className='w-[70px] sm:w-[30px]'>
+                <svg width="30" height="112" className='w-[105px] sm:w-[50px]'>
                     <g transform="translate(15, 20)">
                         <DayLabelText dx={-15} dy={8} isVisible={false} day='Sun' fontSize='0.7rem' />
                         <DayLabelText dx={-15} dy={22} day='Mon' fontSize='0.7rem' />
@@ -89,7 +89,7 @@ export const YearCalendar = ({ onEntryClick }: Props) => {
                         <DayLabelText dx={-15} dy={81} isVisible={false} day='Sat' fontSize='0.7rem' />
                     </g>
                 </svg>
-                <div className='overflow-x-auto w-[717px]'>
+                <div className='overflow-x-auto w-[1200px]'>
                     <svg width="717" height="112" className='w-[717px]'>
                         <g transform="translate(0, 20)">
                             {...calendarGroups}

@@ -27,9 +27,9 @@ export const CalendarTypeToggle = ({ onToggle }: Props) => {
             <span
                 className="
                     absolute cursor-pointer top-0 left-0 bottom-0 right-0 
-                    bg-[#eee] duration-500 rounded-full
+                    bg-[#eee] duration-500 rounded-full shadow-sm
                     before:absolute before:content-[''] before:h-[1.4em]
-                    before:top-[2px] before:left-[3px] before:shadow-lg
+                    before:top-[2px] before:left-[3px] before:shadow-xl
                     before:w-[1.4em] before:rounded-[20px] before:border-[#C8C8C8]
                     before:duration-500
                     before:bg-white
