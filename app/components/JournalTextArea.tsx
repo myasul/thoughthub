@@ -40,7 +40,7 @@ export const JournalTextArea = ({ currentDate }: Props) => {
             <div
                 className='
                     p-4 outline-none resize-none 
-                    rounded-md m-auto mt-3 max-h-[470px] h-full w-[95%] mb-3
+                    rounded-md m-auto mt-3 h-full w-[95%] mb-3
                 '
             >
                 <Suspense fallback={<div />}>

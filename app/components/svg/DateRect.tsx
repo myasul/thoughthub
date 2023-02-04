@@ -29,7 +29,7 @@ const getEntryLevel = (entry: string) => {
 
 }
 
-export const JournalSVGRect = ({ x, y, date, onClick }: Props) => {
+export const DateRect = ({ x, y, date, onClick }: Props) => {
     const journal = useJournal()
     const entry = journal[date.format(JournalDateFormat)] ?? ''
     const entryLevel = getEntryLevel(entry)

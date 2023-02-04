@@ -2,10 +2,10 @@ import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 
-import type { AbbrevMonthName } from '~/components/svg/MonthLabelSVGText'
-import { DayLabelSVGText } from '~/components/svg/DayLabelSVGText'
-import { JournalSVGRect } from '~/components/svg/JournalSVGRect'
-import { MonthLabelSVGText } from '~/components/svg/MonthLabelSVGText'
+import type { AbbrevMonthName } from '~/components/svg/MonthLabelText'
+import { DayLabelText } from '~/components/svg/DayLabelText'
+import { DateRect } from '~/components/svg/DateRect'
+import { MonthLabelText } from '~/components/svg/MonthLabelText'
 
 dayjs.extend(weekOfYear)
 
@@ -13,7 +13,7 @@ type Props = {
     onEntryClick: (date: Dayjs) => void
 }
 
-export const JournalCalendar = ({ onEntryClick }: Props) => {
+export const YearCalendar = ({ onEntryClick }: Props) => {
     const generateCalendarSvg = () => {
         const firstDayOfCurrentYear = dayjs(`${dayjs().year()}-01-01T00:00:00Z`)
         const firstDayOfNextYear = firstDayOfCurrentYear.add(1, 'year')
@@ -23,7 +23,7 @@ export const JournalCalendar = ({ onEntryClick }: Props) => {
 
         const calendarGroups = []
         const monthLabels = [
-            <MonthLabelSVGText
+            <MonthLabelText
                 x={14}
                 y={-7}
                 month={currentDay.format('MMM') as AbbrevMonthName}
@@ -39,7 +39,7 @@ export const JournalCalendar = ({ onEntryClick }: Props) => {
 
             if (currentDay.month() !== currentMonth) {
                 monthLabels.push(
-                    <MonthLabelSVGText
+                    <MonthLabelText
                         y={-7}
                         x={groupXPosition + dayXPosition}
                         month={currentDay.format('MMM') as AbbrevMonthName}
@@ -56,7 +56,7 @@ export const JournalCalendar = ({ onEntryClick }: Props) => {
                 const dayYPosition = currentDay.day() * 13
 
                 days.push(
-                    <JournalSVGRect
+                    <DateRect
                         x={dayXPosition}
                         y={dayYPosition}
                         date={currentDay}
@@ -80,13 +80,13 @@ export const JournalCalendar = ({ onEntryClick }: Props) => {
             <div className='flex w-full gap-0'>
                 <svg width="30" height="112" className='w-[70px] sm:w-[30px]'>
                     <g transform="translate(15, 20)">
-                        <DayLabelSVGText dx={-15} dy={8} isVisible={false} day='Sun' />
-                        <DayLabelSVGText dx={-15} dy={22} day='Mon' />
-                        <DayLabelSVGText dx={-15} dy={32} isVisible={false} day='Tue' />
-                        <DayLabelSVGText dx={-15} dy={48} day='Wed' />
-                        <DayLabelSVGText dx={-15} dy={57} isVisible={false} day='Thu' />
-                        <DayLabelSVGText dx={-15} dy={73} day='Fri' />
-                        <DayLabelSVGText dx={-15} dy={81} isVisible={false} day='Sat' />
+                        <DayLabelText dx={-15} dy={8} isVisible={false} day='Sun' />
+                        <DayLabelText dx={-15} dy={22} day='Mon' />
+                        <DayLabelText dx={-15} dy={32} isVisible={false} day='Tue' />
+                        <DayLabelText dx={-15} dy={48} day='Wed' />
+                        <DayLabelText dx={-15} dy={57} isVisible={false} day='Thu' />
+                        <DayLabelText dx={-15} dy={73} day='Fri' />
+                        <DayLabelText dx={-15} dy={81} isVisible={false} day='Sat' />
                     </g>
                 </svg>
                 <div className='overflow-x-auto w-[717px]'>

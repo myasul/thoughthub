@@ -7,9 +7,10 @@ import { JournalActionType } from '~/contexts/JournalContext'
 import { useEffect, useState } from 'react'
 import { useJournalDispatch } from '~/contexts/JournalContext'
 
-import { JournalCalendar } from '~/components/JournalCalendar'
+import { YearCalendar } from '~/components/YearCalendar'
 import { JournalTextArea } from '~/components/JournalTextArea'
 import { Database } from '~/utils/db/Database'
+import { MonthCalendar } from '~/components/MonthCalendar'
 
 export default function Index () {
     const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs())
@@ -51,19 +52,22 @@ export default function Index () {
                 md:max-w-[825px]
             '
         >
-            <h1 className='my-5 font-bold'>Thought Hub</h1>
             <div
                 className='
                     border-[#d0d7de] border border-b-0 w-full rounded-md rounded-b-[0]
-                    px-5 py-5
+                    px-5 py-3
                     md:justify-center
                 '
             >
-                <JournalCalendar onEntryClick={handleJournalCalendarEntryClick} />
+                <div className="text-center">
+                    <h1 className="font-bold text-xl">{currentDate.format('MMMM')}</h1>
+                </div>
+                {/* <YearCalendar onEntryClick={handleJournalCalendarEntryClick} /> */}
+                <MonthCalendar />
             </div>
             <div
                 className='
-                    w-full flex justify-center h-3/5 flex-col items-center
+                    w-full flex justify-center h-[70%] flex-col items-center
                     border border-t-0 rounded-md rounded-t-[0] border-[#d0d7de]
                 '
             >

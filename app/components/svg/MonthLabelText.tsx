@@ -6,7 +6,7 @@ type Props = {
     month: AbbrevMonthName
 }
 
-export const MonthLabelSVGText = ({ x, y, month }: Props) => (
+export const MonthLabelText = ({ x, y, month }: Props) => (
     <text
         className='text-xs font-normal text-[#24292f]'
         x={x}
