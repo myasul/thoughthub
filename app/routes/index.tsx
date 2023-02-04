@@ -11,9 +11,11 @@ import { YearCalendar } from '~/components/YearCalendar'
 import { JournalTextArea } from '~/components/JournalTextArea'
 import { Database } from '~/utils/db/Database'
 import { MonthCalendar } from '~/components/MonthCalendar'
+import { CalendarType, CalendarTypeToggle } from '~/components/CalendarTypeToggle'
 
 export default function Index () {
-    const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs())
+    const [selectedDate, setCurrentDate] = useState<Dayjs>(dayjs())
+    const [selectedCalendarType, setSelectedCalendarType] = useState(CalendarType.Year)
     const dispatch = useJournalDispatch()
 
     useEffect(() => {
@@ -44,6 +46,10 @@ export default function Index () {
         setCurrentDate(date)
     }
 
+    const handleCalendarTypeToggle = (calendarType: CalendarType) => {
+        setSelectedCalendarType(calendarType)
+    }
+
     return (
         <div
             className='
@@ -56,14 +62,25 @@ export default function Index () {
                 className='
                     border-[#d0d7de] border border-b-0 w-full rounded-md rounded-b-[0]
                     px-5 py-3
-                    md:justify-center
+                    md:justify-center md:align-center
                 '
             >
                 <div className="text-center">
-                    <h1 className="font-bold text-xl">{currentDate.format('MMMM')}</h1>
+                    <h1 className="font-bold text-xl">
+                        {selectedDate.format(selectedCalendarType === CalendarType.Year ? 'YYYY' : 'MMMM')}
+                    </h1>
                 </div>
-                {/* <YearCalendar onEntryClick={handleJournalCalendarEntryClick} /> */}
-                <MonthCalendar />
+                <div className='h-[200px]'>
+                    {
+                        selectedCalendarType === CalendarType.Year
+                            ? <YearCalendar onEntryClick={handleJournalCalendarEntryClick} />
+                            : <MonthCalendar selectedDate={selectedDate} onEntryClick={handleJournalCalendarEntryClick} />
+                    }
+                </div>
+                <div className='flex justify-center h-[50px] items-center'>
+                    <div></div>
+                    <CalendarTypeToggle onToggle={handleCalendarTypeToggle} />
+                </div>
             </div>
             <div
                 className='
@@ -71,7 +88,7 @@ export default function Index () {
                     border border-t-0 rounded-md rounded-t-[0] border-[#d0d7de]
                 '
             >
-                <JournalTextArea currentDate={currentDate} />
+                <JournalTextArea selectedDate={selectedDate} />
             </div>
         </div>
     )

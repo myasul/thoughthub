@@ -7,9 +7,14 @@ import { DateRectWithText } from './svg/DateRectWithText'
 
 dayjs.extend(weekOfYear)
 
-export const MonthCalendar = () => {
+type Props = {
+    onEntryClick: (date: Dayjs) => void
+    selectedDate: Dayjs
+}
+
+export const MonthCalendar = ({ onEntryClick, selectedDate }: Props) => {
     const generateCalendarSvg = () => {
-        const firstDayOfCurrentMonth = dayjs().date(1)
+        const firstDayOfCurrentMonth = selectedDate.date(1)
         const currentMonth = firstDayOfCurrentMonth.month()
 
         let currentDay = firstDayOfCurrentMonth
@@ -33,6 +38,7 @@ export const MonthCalendar = () => {
                         content={currentDay.date().toString()}
                         date={currentDay}
                         size={20}
+                        onClick={onEntryClick}
                     />
                 )
 
@@ -49,9 +55,9 @@ export const MonthCalendar = () => {
         }
 
         return (
-            <div className='flex w-full gap-0 justify-center'>
-                <svg width="30" height="200" className='w-[70px] sm:w-[30px]'>
-                    <g transform="translate(42, 20)">
+            <div className='flex w-full gap-0 justify-center h-full'>
+                <svg width="50" height="200">
+                    <g transform="translate(20, 20)">
                         <DayLabelText dx={-15} dy={(26 * 0) + 15} isVisible={false} day='Sun' fontSize='15px'/>
                         <DayLabelText dx={-15} dy={(26 * 1) + 15} day='Mon' fontSize='15px'/>
                         <DayLabelText dx={-15} dy={(26 * 2) + 15} isVisible={false} day='Tue' fontSize='15px'/>

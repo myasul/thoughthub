@@ -80,13 +80,13 @@ export const YearCalendar = ({ onEntryClick }: Props) => {
             <div className='flex w-full gap-0'>
                 <svg width="30" height="112" className='w-[70px] sm:w-[30px]'>
                     <g transform="translate(15, 20)">
-                        <DayLabelText dx={-15} dy={8} isVisible={false} day='Sun' />
-                        <DayLabelText dx={-15} dy={22} day='Mon' />
-                        <DayLabelText dx={-15} dy={32} isVisible={false} day='Tue' />
-                        <DayLabelText dx={-15} dy={48} day='Wed' />
-                        <DayLabelText dx={-15} dy={57} isVisible={false} day='Thu' />
-                        <DayLabelText dx={-15} dy={73} day='Fri' />
-                        <DayLabelText dx={-15} dy={81} isVisible={false} day='Sat' />
+                        <DayLabelText dx={-15} dy={8} isVisible={false} day='Sun' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={22} day='Mon' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={32} isVisible={false} day='Tue' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={48} day='Wed' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={57} isVisible={false} day='Thu' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={73} day='Fri' fontSize='0.7rem' />
+                        <DayLabelText dx={-15} dy={81} isVisible={false} day='Sat' fontSize='0.7rem' />
                     </g>
                 </svg>
                 <div className='overflow-x-auto w-[717px]'>
@@ -102,7 +102,7 @@ export const YearCalendar = ({ onEntryClick }: Props) => {
     }
 
     return (
-        <div className='mt-2 leading-normal font-calendar'>
+        <div className='leading-normal font-calendar pt-8'>
             {generateCalendarSvg()}
         </div>
     )

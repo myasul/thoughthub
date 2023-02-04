@@ -1,4 +1,6 @@
 import type { Dayjs } from 'dayjs'
+import { JournalDateFormat, useJournal } from '~/contexts/JournalContext'
+import { getEntryLevel } from '~/utils/entry-level'
 
 type Props = {
     xAxis: number
@@ -6,11 +8,24 @@ type Props = {
     size: number
     content: string
     date: Dayjs
+    onClick: (date: Dayjs) => void
 }
 
-export const DateRectWithText = ({ xAxis, yAxis, content, date, size }: Props) => {
+/**
+ * TODOS:
+ * - Add hover effect. e.g. change opacity.
+ */
+export const DateRectWithText = ({ xAxis, yAxis, content, date, size, onClick }: Props) => {
+    const journal = useJournal()
+    const entry = journal[date.format(JournalDateFormat)] ?? ''
+    const entryLevel = getEntryLevel(entry)
+
     return (
-        <g key={`${xAxis}-${yAxis}`}>
+        <g
+            key={`${xAxis}-${yAxis}`}
+            onClick={() => onClick(date)}
+            className="cursor-pointer"
+        >
             <rect
                 width={size}
                 height={size}
@@ -19,15 +34,14 @@ export const DateRectWithText = ({ xAxis, yAxis, content, date, size }: Props) =
                 className="
                     shape-geometric-precision bg-[#ebedf0] fill-[#ebedf0]
                     rounded-sm outline outline-offset-[-1px] outline-1
-                     outline-calendar-entry-border cursor-pointer
+                     outline-calendar-entry-border
                 "
                 style={{
-                    backgroundColor: "#ebedf0",
-                    fill: "#ebedf0"
+                    backgroundColor: entryLevel,
+                    fill: entryLevel
                 }}
                 x={xAxis}
                 y={yAxis}
-            // onClick={() => onClick(date)}
             >
                 {date.toISOString()}
             </rect>

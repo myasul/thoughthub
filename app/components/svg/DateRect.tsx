@@ -1,32 +1,12 @@
 import type { Dayjs } from 'dayjs'
 import { JournalDateFormat, useJournal } from '~/contexts/JournalContext'
+import { getEntryLevel } from '~/utils/entry-level'
 
 type Props = {
     x: number
     y: number
     date: Dayjs
     onClick: (date: Dayjs) => void
-}
-
-enum EntryLevel {
-    LevelZero = '#ebedf0',
-    LevelOne = '#9be9a8',
-    LevelTwo = '#40c463',
-    LevelThree = '#30a14e',
-    LevelFour = '#216e39'
-}
-
-const getEntryLevel = (entry: string) => {
-    if (entry === '') return EntryLevel.LevelZero
-
-    const wordCount = entry.split(' ').length
-
-    if (wordCount > 30) return EntryLevel.LevelFour
-    if (wordCount > 25) return EntryLevel.LevelThree
-    if (wordCount > 10) return EntryLevel.LevelTwo
-    
-    return EntryLevel.LevelOne
-
 }
 
 export const DateRect = ({ x, y, date, onClick }: Props) => {
